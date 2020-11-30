@@ -1,0 +1,5 @@
+---
+- name: "Install Barracks"
+  hosts:
+  roles:
+    - install

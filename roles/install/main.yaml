@@ -1,0 +1,42 @@
+---
+
+- name: Pull Images
+  block:
+    - name: Try pulling from the local registry
+      docker_image:
+        name: {{ image }}
+        source: pull
+      loop: [
+        'localhost:5000/registry:2.7.1'
+      ]
+
+  rescue:
+    - name: Pull from docker hub
+      docker_image:
+        name: {{ image }}
+        source: pull
+      loop: [
+        'registry:2.7.1'
+      ]
+
+- name: Install applications
+  block:
+    - name: Try using a local image
+      docker_container:
+        detach: yes
+        image: {{ item.image }}
+        name: {{ item.name }}
+        published_ports: [ {{ item.port_mapping }} ]
+        restart_policy: always
+      loop:
+        - { image: 'localhost:5000/registry:2.7.1', name: 'registry', port_mapping: '5000:5000' }
+  rescue:
+    - name: Use the docker hub image
+      docker_container:
+        detach: yes
+        image: {{ item.image }}
+        name: {{ item.name }}
+        published_ports: [ {{ item.port_mapping }} ]
+        restart_policy: always
+      loop:
+        - { image: 'registry:2.7.1', name: 'registry', port_mapping: '5000:5000' }
