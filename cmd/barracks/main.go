@@ -1,9 +1,9 @@
 package barracks
 
-import {
+import (
 	"fmt"
 	deploy "internal/applications"
-}
+)
 
 
 
