@@ -2,7 +2,7 @@ package barracks
 
 import (
 	"fmt"
-	deploy "internal/applications"
+	deploy "playbooks/internal/applications"
 )
 
 
