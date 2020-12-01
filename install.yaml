@@ -1,5 +1,10 @@
 ---
+- name: "Make sure pre-requisites are satisfied"
+  hosts: localhost
+  roles:
+    - pre
+
 - name: "Install Barracks"
-  hosts:
+  hosts: localhost
   roles:
     - install
