@@ -5,8 +5,29 @@
   roles:
     - pre
 
-- name: "Install Barracks"
+- name: "Install Registry"
   hosts: localhost
   become: yes
-  roles:
-    - install
+  tasks:
+    - include_role:
+        name: "roles/install"
+      vars:
+        job: "install_registry"
+
+- name: "Populate Images"
+  hosts: localhost
+  become: yes
+  tasks:
+    - include_role:
+        name: "roles/install"
+      vars:
+        job: "populate_images"
+
+- name: "Deploy Applications"
+  hosts: localhost
+  become: yes
+  tasks:
+    - include_role:
+        name: "roles/install"
+      vars:
+        job: "deploy_applications"
