@@ -1,0 +1,19 @@
+local_registry: localhost:5000
+
+registry:
+  name: registry
+  tag: 2.7.1
+  port_mapping: 5000:5000
+
+apps:
+  vault:
+    name: vault
+    tag: 1.6.0
+    volumes:
+      - ./volumes/logs:/vault/logs
+      - ./volumes/file:/vault/file
+      - ./volumes/config:/vault/config
+    capabilities:
+      - IPC_LOCK
+    entrypoint: "vault server -config=/vault/config/vault.json"
+    port_mapping: 8200:8200

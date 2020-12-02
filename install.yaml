@@ -1,12 +1,17 @@
 ---
+
 - name: "Make sure pre-requisites are satisfied"
   hosts: localhost
   become: yes
   roles:
     - pre
 
-- name: "Install Barracks"
+- name: "Install"
   hosts: localhost
   become: yes
+  vars_files:
+    - defaults.yaml
   roles:
-    - install
+    - deploy_registry
+    - populate_registry
+    - deploy_applications

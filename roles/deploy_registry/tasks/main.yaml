@@ -1,0 +1,14 @@
+---
+
+- name: Pull Image
+  docker_image:
+    name: "{{ registry.name }}:{{ registry.tag }}"
+    state: present
+
+- name: Deploy Registry
+  docker_container:
+    detach: yes
+    image: "{{ local_registry }}/{{ registry.name }}:{{ registry.tag }}"
+    name: "{{ registry.name }}"
+    published_ports: [ "{{ registry.port_mapping }}" ]
+    restart_policy: always
