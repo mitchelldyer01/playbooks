@@ -1,0 +1,14 @@
+---
+
+- name: Pull Images from Remote
+  docker_image:
+    name: "{{ item.value.name }}:{{ item.value.tag }}"
+    state: present
+  loop: "{{ apps | dict2items }}"
+
+- name: Push Images to Local
+  docker_image:
+    name: "{{ item.value.name }}:{{ item.value.tag }}"
+    push: yes
+    repository: "{{ local_registry }}/{{ item.value.name }}:{{ item.value.tag }}"
+  loop: "{{ apps | dict2items }}"

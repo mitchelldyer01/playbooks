@@ -1,33 +1,17 @@
 ---
+
 - name: "Make sure pre-requisites are satisfied"
   hosts: localhost
   become: yes
   roles:
     - pre
 
-- name: "Install Registry"
+- name: "Install"
   hosts: localhost
   become: yes
-  tasks:
-    - include_role:
-        name: "roles/install"
-      vars:
-        job: "install_registry"
-
-- name: "Populate Images"
-  hosts: localhost
-  become: yes
-  tasks:
-    - include_role:
-        name: "roles/install"
-      vars:
-        job: "populate_images"
-
-- name: "Deploy Applications"
-  hosts: localhost
-  become: yes
-  tasks:
-    - include_role:
-        name: "roles/install"
-      vars:
-        job: "deploy_applications"
+  vars_files:
+    - defaults.yaml
+  roles:
+    - deploy_registry
+    - populate_registry
+    - deploy_applications

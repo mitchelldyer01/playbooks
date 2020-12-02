@@ -1,0 +1,12 @@
+---
+
+- name: Deploy Vault
+  docker_container:
+    detach: yes
+    image: "{{ local_registry }}/{{ apps.vault.name }}:{{ apps.vault.tag }}"
+    name: "{{ apps.vault.name }}"
+    restart_policy: always
+    volumes: "{{ apps.vault.volumes }}"
+    capabilities: "{{ apps.vault.capabilities }}"
+    entrypoint: "{{ apps.vault.entrypoint }}"
+    published_ports: [ "{{ apps.vault.port_mapping }}" ]
