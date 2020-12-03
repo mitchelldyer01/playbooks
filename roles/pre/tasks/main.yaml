@@ -1,17 +1,17 @@
 ---
 
 - name: Ensure aptitude is available
-  apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+  apt: name=aptitude=0.8.11-7 state=present update_cache=yes force_apt_get=yes
 
 - name: Ensure system packages are available
-  apt: name={{ item }} state=latest update_cache=yes
-  loop: [ 'apt-transport-https',
-          'ca-certificates',
-          'curl',
-          'software-properties-common',
-          'python3-pip',
-          'virtualenv',
-          'python3-setuptools']
+  apt: name={{ item }} state=present update_cache=yes
+  loop: [ 'apt-transport-https=2.7.7+dfsg-1',
+          'ca-certificates=20200601~deb10u1',
+          'curl=7.64.0-4+deb10u1',
+          'software-properties-common=0.96.20.2-2',
+          'python3-pip=18.1-5+rpt1',
+          'virtualenv=15.1.0+ds-2',
+          'python3-setuptools=40.8.0-1']
 
 - name: Ensure Docker GPG Key is available
   apt_key:
@@ -24,7 +24,7 @@
     state: present
 
 - name: Ensure Docker is available
-  apt: update_cache=yes name=docker-ce state=latest
+  apt: update_cache=yes name=docker-ce=5.19.03.14~3-0~ubuntu-bionic state=present
 
 - name: Ensure Docker Module for Python is available
   pip:
