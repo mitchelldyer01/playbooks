@@ -17,3 +17,6 @@ apps:
       - IPC_LOCK
     entrypoint: "vault server -config=/vault/config/vault.json"
     port_mapping: 8200:8200
+  go:
+    name: golang
+    tag: 1.15.6-alpine3.12
