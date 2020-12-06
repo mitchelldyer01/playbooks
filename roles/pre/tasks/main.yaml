@@ -5,7 +5,7 @@
 
 - name: Ensure system packages are available
   apt: name={{ item }} state=present update_cache=yes
-  loop: [ 'apt-transport-https=2.7.7+dfsg-1',
+  loop: [ 'apt-transport-https=1.8.2.1',
           'ca-certificates=20200601~deb10u1',
           'curl=7.64.0-4+deb10u1',
           'software-properties-common=0.96.20.2-2',
@@ -24,7 +24,7 @@
     state: present
 
 - name: Ensure Docker is available
-  apt: update_cache=yes name=docker-ce=5.19.03.14~3-0~ubuntu-bionic state=present
+  apt: update_cache=yes name=docker-ce=5:19.03.14~3-0~ubuntu-bionic state=present
 
 - name: Ensure Docker Module for Python is available
   pip:
